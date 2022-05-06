@@ -1,50 +1,49 @@
-import React from 'react'
+import React, { Component } from 'react'
 // import {useState} from 'react'
 import {connect } from 'react-redux'
 import './Shop.css'
 import { buyLaptop, buyMobile,fetching } from '../Redux/actions/actions'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 
 
-function Shop(data) {
+class ShopClassComponent extends Component {
     // const [count,setCount] = useState(100)
 
     // const buyLaptop=()=>{
     //     setCount(count-1)
     // }
-    let users = useSelector(state =>state.users.data)
-    
+   render(){
   return (
     <div >
-        <h1>Welcome to React-Redux Practice Program : Function Component</h1>
+        <h1>Welcome to React-Redux Practice Program : ClassComponent</h1>
         <div className='main'>
         <div className='container'>
             <p>Dell  Inspiron</p>
-            <p>No of Laptops : {data.numOfLaptops}</p>
-            <button onClick={data.buyLaptop}>Buy Now</button>
+            <p>No of Laptops : {this.props.numOfLaptops}</p>
+            <button onClick={this.props.buyLaptop}>Buy Now</button>
         </div>
         <div className='container'>
              <p>Redmi Note 7 Pro </p>
-            <p>No of Mobiles : {data.numOfMobiles}</p>
-            <button onClick={data.buyMobile}>Buy Now</button>
+            <p>No of Mobiles : {this.props.numOfMobiles}</p>
+            <button onClick={this.props.buyMobile}>Buy Now</button>
         </div>
         <div className='container'>
              <p>Fetching Data in Redux Environment</p>
-            <p>Length of the Fetched Data : {users.length}</p>
-            <button onClick={data.fetching}>Call API in Redux</button>
+            <p>Length of the Fetched Data : {this.props.users.length}</p>
+            <button onClick={this.props.fetching}>Call API in Redux</button>
         </div>
         </div>
         
     </div>
-  )
+  )}
 }
 const mapStateToProps = (state) =>{
     return {
         // numOfLaptops:state.numOfLaptops
         numOfLaptops:state.laptops.numOfLaptops,
         numOfMobiles:state.mobiles.numOfMobiles,
-        // users : state.users.data
+        users : state.users.data
     }
 }
 
@@ -56,4 +55,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Shop)
+export default connect(mapStateToProps,mapDispatchToProps)(ShopClassComponent)
